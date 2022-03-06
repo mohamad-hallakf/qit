@@ -24,6 +24,7 @@
     <link href="{{ asset('fontawesome') }}/css/all.css" rel="stylesheet">
 
     <link href="{{ asset('material') }}/css/material-dashboard-rtl.css?v=1.1" rel="stylesheet" />
+
 </head>
 
 <body class="{{ $class ?? '' }}">
@@ -84,14 +85,23 @@
     <script src="{{ asset('material') }}/demo/demo.js"></script>
     <script src="{{ asset('material') }}/js/settings.js"></script>
     <script>
+        function Alert(Message, type) {
+            $('#alertPlace').html('<div class="alert alert-white h-75 mb-0 alert-dismissible fade show m-1  border border-' + type +
+                ' " role="alert"><button type="button"   class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <p class="text-' +
+                type + ' m-0 font-weight-bold">' + Message + '</p></div>');
+        }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         function formValidtor(formid, inputsNames) {
             $.each(inputsNames, function(index, value) {
                 if ($("#" + formid + " input[name=" + value + "]").val() == "") {
                     $("#" + formid + " input[name=" + value + "]").addClass('is-invalid')
                     $("#" + formid + " input[name=" + value + "]").removeClass('is-valid')
-                }
-
-                else {
+                } else {
                     $("#" + formid + " input[name=" + value + "]").addClass('is-valid')
                     $("#" + formid + " input[name=" + value + "]").removeClass('is-invalid')
                 }

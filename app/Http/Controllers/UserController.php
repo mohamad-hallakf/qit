@@ -19,10 +19,5 @@ class UserController extends Controller
         return view('users.index', ['users' => $model->paginate(15)]);
     }
 
-    public function getNotifications( )
-    {
-        $user = Auth::user();
 
-     echo $user->notifications ;
-    }
 }

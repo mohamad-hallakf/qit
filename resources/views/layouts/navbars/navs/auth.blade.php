@@ -1,9 +1,8 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top shadow">
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top shadow" id="side">
     <div class="container-fluid">
-        <div class="navbar-wrapper">
+        <div class="navbar-wrapper  ">
             {{-- <a class="navbar-brand" href="#">{{ $titlePage }}</a> --}}
-
 
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse">
@@ -35,47 +34,47 @@
                 @auth
 
 
-                <li class="nav-item dropdown">
-                  @php
-
-
-                    $notifications = optional(auth()->user())->unreadNotifications;
-                    $notifications_count = optional($notifications)->count();
-                    $notifications_latest = optional($notifications)->take(5);
-                    @endphp
-
-                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                        <i class="fa fa-lg  fa-solid fa-bell text-info"></i>
-                        @isset($notifications_count)  <span class="notification">{{$notifications_count}}</span> @endisset
-
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" >
-                        @if($notifications_latest)
-                        @foreach($notifications_latest as $notification)
+                    <li class="nav-item dropdown">
                         @php
-                        $notification_text = isset($notification->data['name'])? $notification->data['name'] : $notification->data['email'];
+
+                            $notifications = optional(auth()->user())->unreadNotifications;
+                            $notifications_count = optional($notifications)->count();
+                            $notifications_latest = optional($notifications)->take(5);
                         @endphp
-                             <a class="dropdown-item" href="{{route("notifications.show", $notification->id)}}">{{$notification_text}}</a>
 
-                        @endforeach
-                        @endif
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                            <i class="fa fa-lg  fa-solid fa-bell text-info"></i>
+                            @isset($notifications_count)
+                                <span class="notification">{{ $notifications_count }}</span>
+                            @endisset
+
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            @if ($notifications_latest)
+                                @foreach ($notifications_latest as $notification)
+                                    @php
+                                        $notification_text = isset($notification->data['text']) ? $notification->data['text'] : $notification->data['text'];
+                                    @endphp
+                                    <a class="dropdown-item"
+                                        href="{{ route('notifications.show', $notification->id) }}">{{ $notification_text }}</a>
+                                @endforeach
+                            @endif
 
 
-                    </div>
-                </li>
+                        </div>
+                    </li>
                 @endauth
-                  {{-- notify --}}
+                {{-- notify --}}
                 <li class="nav-item dropdown">
 
-                    <a  class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown"
-                      >
+                    <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown">
                         <i class=" fa fa-lg fa-solid fa-user text-info"></i>
                         <p class="d-lg-none d-md-block">
                             {{ __('Account') }}
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                        <a class="dropdown-item" href="#">    {{auth()->user()->name}}</a>
+                        <a class="dropdown-item" href="#"> {{ auth()->user()->name }}</a>
                         <hr>
                         <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
                         <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
@@ -88,3 +87,7 @@
         </div>
     </div>
 </nav>
+
+
+
+

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NotificationsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +77,47 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("$module_name/markAllAsRead", ['as' => "$module_name.markAllAsRead", 'uses' => "$controller_name@markAllAsRead"]);
     Route::delete("$module_name/deleteAll", ['as' => "$module_name.deleteAll", 'uses' => "$controller_name@deleteAll"]);
     Route::get("$module_name/{id}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
+/*
+     *
+     *  service Routes
+     *
+     * ---------------------------------------------------------------------
+     */
+    $model_name = 'service';
+    $controller_name = 'App\Http\Controllers\ServiceController';
+        Route::get("$model_name/",''.$controller_name.'@index')->name('service.index');
+        Route::post("$model_name/create", ''.$controller_name.'@create')->name('service.create');
+        Route::post("$model_name/store", ''.$controller_name.'@store')->name('service.store');
+        Route::post("$model_name/update", ''.$controller_name.'@update')->name('service.update');
+        Route::post("$model_name/destroy", ''.$controller_name.'@destroy')->name('service.destroy');
+        Route::post("$model_name/edit", ''.$controller_name.'@edit')->name('service.edit');
+/*
+     *
+     *  child Routes
+     *
+     * ---------------------------------------------------------------------
+     */
+        $model_name = 'child';
+        $controller_name = 'App\Http\Controllers\ChildController';
+        Route::get("$model_name/",''.$controller_name.'@index')->name('child.index');
+        Route::get("$model_name/mychildren",''.$controller_name.'@mychildren')->name('child.mychildren');
+        Route::post("$model_name/create", ''.$controller_name.'@create')->name('child.create');
+        Route::post("$model_name/store", ''.$controller_name.'@store')->name('child.store');
+        Route::post("$model_name/update", ''.$controller_name.'@update')->name('child.update');
+        Route::post("$model_name/destroy", ''.$controller_name.'@destroy')->name('child.destroy');
+        Route::post("$model_name/edit", ''.$controller_name.'@edit')->name('child.edit');
+/*
+     *
+     *  question Routes
+     *
+     * ---------------------------------------------------------------------
+     */
+    $model_name = 'question';
+    $controller_name = 'App\Http\Controllers\QuestionsController';
+    Route::get("$model_name/",''.$controller_name.'@index')->name('question.index');
+    Route::get("$model_name/mychildren",''.$controller_name.'@mychildren')->name('question.mychildren');
+    Route::post("$model_name/create", ''.$controller_name.'@create')->name('question.create');
+    Route::post("$model_name/store", ''.$controller_name.'@store')->name('question.store');
+    Route::post("$model_name/update", ''.$controller_name.'@update')->name('question.update');
+    Route::post("$model_name/destroy", ''.$controller_name.'@destroy')->name('question.destroy');
+    Route::post("$model_name/edit", ''.$controller_name.'@edit')->name('question.edit');

@@ -42,7 +42,25 @@
                     <p>{{ __('notifications') }}</p>
                 </a>
             </li>
-            @if (auth()->user()->name == 'Admin Admin')
+            <li class="nav-item{{ $activePage == 'services' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('service.index') }}">
+                    <i class="fa fa-lg fa-brands fa-servicestack"></i>
+                    <p>{{ __('services') }}</p>
+                </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'children' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('child.index') }}">
+                    <i class="fa fa-lg fa-solid fa-child"></i>
+                    <p>{{ __('children') }}</p>
+                </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'mychildren' ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('child.mychildren') }}">
+                    <i class="fa fa-lg fa-solid fa-child"></i>
+                    <p>{{ __('my children') }}</p>
+                </a>
+            </li>
+            @if (auth()->user()->role == 'admin')
                 <li
                     class="nav-item {{ $activePage == 'profile' || $activePage == 'user-management' ? ' active' : '' }}">
                     <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">

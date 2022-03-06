@@ -16,9 +16,10 @@ class NewUserNotification extends Notification
      *
      * @return void
      */
-    public function __construct($user)
+    public $arr;
+    public function __construct($arr)
     {
-        $this->user = $user;
+        $this->arr = $arr;
     }
 
     /**
@@ -52,11 +53,17 @@ class NewUserNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
+        $text = ' عميل جديد <strong> {  '.$this->arr['username'].' }</strong>';
+
         return [
-            'name' => $this->user->name,
-            'email' => $this->user->email,
+            'title'         => 'عميل جديد',
+            'module'        => 'الزبائن',
+            'type'          => 'created', // created, published, viewed,
+            'icon'          => 'fas fa-user',
+            'text'          => $text,
+
         ];
     }
 }

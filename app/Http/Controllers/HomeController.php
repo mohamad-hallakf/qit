@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Service;
 class HomeController extends Controller
 {
     /**
@@ -21,10 +21,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $services = Service::latest()->get();
+
+        return view('dashboard',compact('services'));
     }
-    public function guest()
-    {
-        return view('welcome');
-    }
+
 }

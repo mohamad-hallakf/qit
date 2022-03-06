@@ -1,3 +1,4 @@
+<div id="alertPlace"></div>
 <footer class="footer bg-secondary">
   <div class="container-fluid">
 

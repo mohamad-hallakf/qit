@@ -44,22 +44,8 @@
                                     {!! $data->text !!}
                                 </td>
                             </tr>
-                            @if($data->url_backend != '')
-                            <tr>
-                                <th>URL Backend</th>
-                                <td>
-                                    Backend: <a href="{{$data->url_backend}}">{{$data->url_backend}}</a>
-                                </td>
-                            </tr>
-                            @endif
-                            @if($data->url_frontend != '')
-                            <tr>
-                                <th>URL Frontend</th>
-                                <td>
-                                    Frontend: <a href="{{$data->url_frontend}}">{{$data->url_frontend}}</a>
-                                </td>
-                            </tr>
-                            @endif
+
+
                         </tbody>
                     </table>
                 </div>

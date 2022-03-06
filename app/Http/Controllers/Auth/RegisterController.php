@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Notifications\NewUserNotification;
 class RegisterController extends Controller
 {
     /*
@@ -64,10 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
+            'phone1' => $data['phone1'],
+            'phone2' => $data['phone2'],
+            'country' => $data['country'],
+            'city' => $data['city'],
+            'address' => $data['address'],
+            'country' => $data['country'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $admin =User::find(1);
+        $arr['username']= $user->name;
+        $admin->notify(new NewUserNotification($arr));
+
+        return  $user;
     }
 }
