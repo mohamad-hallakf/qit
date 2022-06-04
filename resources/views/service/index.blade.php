@@ -5,20 +5,24 @@
         <div class="container-fluid">
 
             <div class=" row   bg-gray m-1 mb-2 rounded pb-0 ">
+                <div class="col-10  mt-2">
+                    <h1 class="text-muted  text-lg h1  "> سجل الخدمات </h1>
+                </div>
+                <div class="col-2 mt-2 text-center">
 
+                    <!-- Button trigger modal -->
+                    <span data-toggle="tooltip" data-placement="auto">
 
-                <!-- Button trigger modal -->
-                <span data-toggle="tooltip" data-placement="auto" class="h3 text-muted">
+                        <button type="button" class="btn btn-success    " data-toggle="modal" data-target="#addmodel"
+                            id='internalAdding'>
+                            <i class="fas fa-plus-circle fa-2x"></i>
+                        </button>
 
-                    <button type="button" class="btn btn-success p-2 rounded-circle" data-toggle="modal"
-                        data-target="#addmodel" id='internalAdding'>
-                        <i class="fas fa-plus-circle fa-2x"></i>
-                    </button>
-                    اضافة خدمة
-                </span>
+                    </span>
 
+                </div>
             </div>
-
+            <hr>
 
             <div clsss="table-responsive mb-5 ">
                 <table class="table table-bordered data-table table-condensed table-hover shadow-sm ">
@@ -44,6 +48,7 @@
         @include('service.add-service')
         @include('service.delete-service')
         @include('service.edit-service')
+        @include('service.link-service')
     </div>
 
     <script type="text/javascript">
@@ -99,18 +104,10 @@
 
         $(document).on('click', '.edit', function() {
             var id = $(this).attr('data-id');
-            $('#theID').val(id);
-            $('#editForm select[name=farmid] > option').each(function() {
 
-                if ($(this).val() != 'noselect')
-                    $(this).remove();
-            });
-            var form = document.getElementById('editForm');
 
-            for (I = 0; I < form.length; I++) {
-                $(form[I]).removeClass('is-invalid')
-                $(form[I]).removeClass('is-valid')
-            }
+
+
 
             var form = document.getElementById('editForm');
             data = {
@@ -139,6 +136,13 @@
 
 
 
+        });
+
+
+
+        $(document).on('click', '.link', function() {
+            var id = $(this).attr('data-id');
+            $('#link').val(id);
         });
     </script>
 

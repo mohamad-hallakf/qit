@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use DataTables;
 use App\Models\Questions;
+use App\Models\User;
+use App\Models\Answers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use App\Notifications\NewAnswer;
 class QuestionsController extends Controller
 {
 
@@ -26,11 +28,17 @@ class QuestionsController extends Controller
 
         $model_name = $this->model_name;
 
-        $columnArray = ['name','type',"description" ];
+        $columnArray = ['content', 'status', "privacy",'common'];
 
         if ($request->ajax()) {
             $data = Questions::latest()->get();
+            foreach($data as $q){
+               if($q->common) $q->common="شائع";
+               else $q->common="غير شائع";
 
+               if($q->status) $q->status="معلق";
+               else $q->status="مقبول";
+            }
 
             return Datatables::of($data)
 
@@ -43,6 +51,8 @@ class QuestionsController extends Controller
                            </a>
                            <a href="#" data-id="' . $row->id . '"
                            class="btn btn-danger   delete" data-toggle="modal" title="' . __('clients.delete') . '" data-target="#removemodal"><i class="fa fa-trash"></i></a>
+                           <a href="#" data-id="' . $row->id . '"
+                           class="btn btn-success   accept" data-toggle="modal" title="' . __('clients.add') . '" data-target=""><i class="fa fa-check"></i></a>
 
                         ';
 
@@ -60,9 +70,14 @@ class QuestionsController extends Controller
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function accept(Request $request)
     {
-        return view('clients::create');
+
+        $question = Questions::find($request->id);
+        $question->status=0;
+        $question->save();
+        echo json_encode(array('response' => true, 'data' => $question));
+        die();
     }
 
     /**
@@ -72,21 +87,18 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-
-                $request->validate([
-                    'name' => 'required|max:15',
-                ]);
-            $question = new Questions;
-            $question->name = $request->name;
-            $question->description = $request->description;
-            $question->type = $request->type;
+        $question = new Questions;
+        $question->content = $request->content;
+        $question->privacy = $request->privacy;
+        $question->userid = Auth::id();
+        if ($request->file('image')) {
             $path = $request->file('image')->store('images', ['disk' => 'public']);
             $question->image = $path;
-             $question->save();
+        }
 
-            return redirect()->route('question.index');
+        $question->save();
 
-
+        return redirect()->route('question.questions');
     }
 
     /**
@@ -94,8 +106,25 @@ class QuestionsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show()
+    public function answer(Request $request)
     {
+
+        $answer=new Answers;
+        $answer->questionid=$request->questionid;
+        $answer->content=$request->answer;
+        $answer->answerby=Auth::id();
+        $answer->save();
+        $question = Questions::find($answer->questionid);
+        $doctor=User::find($answer->answerby);
+        $user=User::find($question->userid);
+
+        $arr['dname']= $doctor->name;
+        $arr['uname']= $user->name;
+        $arr['qcontent']= $question->content;
+        $arr['acontent']=$answer->content;
+        $user->notify(new NewAnswer($arr));
+
+        return redirect()->route('question.questions');
     }
 
     /**
@@ -119,12 +148,9 @@ class QuestionsController extends Controller
      */
     public function update(Request $request)
     {
+
         $question = Questions::find($request->id);
-        $question->name = $request->name;
-        $question->description = $request->description;
-        $question->type = $request->type;
-        $path = $request->file('image')->store('images');
-        $question->image = $path;
+        $question->common = $request->common;
         $save = $question->save();
         echo json_encode(array('response' => $save, 'data' => $question));
         die();
@@ -141,5 +167,13 @@ class QuestionsController extends Controller
         $delete = $question->delete();
         echo json_encode(array('response' => $delete, 'data' => $question));
         die();
+    }
+
+
+    public function questions(Request $request)
+    {
+        $model_name = $this->model_name;
+        $questions = Questions::latest()->with('answers','user')->get();
+        return view("$model_name.questions", compact('questions'));
     }
 }

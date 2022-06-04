@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLongTitle">اضافة خدمة</h5>
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">اضافة طفل'</h5>
                 <button type="button" class="close" data-dismiss="modal">
 
                 </button>

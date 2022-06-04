@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->integer('userid');
             $table->string("image")->nullable();
-            $table->boolean('status')->default(false);;
+            $table->boolean('status')->default(true);;
             $table->boolean('common')->default(false);;
             $table->string('content');
             $table->string('privacy')->default('public');

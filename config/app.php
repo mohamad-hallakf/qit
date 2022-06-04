@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -190,6 +191,7 @@ return [
     */
 
     'aliases' => [
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

@@ -6,7 +6,6 @@
             <div class="modal-header">
                 <h5 class="modal-title text-center" id="exampleModalLongTitle">اضافة خدمة</h5>
                 <button type="button" class="close" data-dismiss="modal">
-
                 </button>
             </div>
             <div class="modal-body">

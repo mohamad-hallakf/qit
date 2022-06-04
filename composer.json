@@ -13,6 +13,9 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "nunomaduro/laravel-desktop-notifier": "^2.6",
+        "pusher/pusher-php-server": "^7.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "yajra/laravel-datatables-oracle": "^9.19"
     },
     "require-dev": {

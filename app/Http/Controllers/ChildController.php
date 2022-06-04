@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use DataTables;
 use App\Models\Child;
 use App\Models\Child_Disease;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ChildController extends Controller
 {
@@ -25,11 +24,10 @@ class ChildController extends Controller
 
         $model_name = $this->model_name;
 
-        $columnArray = ['name', 'type', "description"];
+        $columnArray = ['name', 'dateofbirth'];
 
         if ($request->ajax()) {
             $data = Child::latest()->get();
-
 
             return Datatables::of($data)
 
@@ -74,10 +72,14 @@ class ChildController extends Controller
 
         $child = new Child;
         $child->name = $request->name;
+        $child->gender = $request->gender;
         $child->userid = Auth::id();
         $child->dateofbirth = $request->dateofbirth;
-        $path = $request->file('image')->store('images', ['disk' => 'public']);
-        $child->image = $path;
+        if($request->file('image')){
+            $path = $request->file('image')->store('images', ['disk' => 'public']);
+            $child->image = $path;
+        }
+
         $save = $child->save();
         if ($request->autism) {
             $cd = new Child_Disease;
@@ -155,13 +157,10 @@ class ChildController extends Controller
 
     public function mychildren()
     {
-
-
         $model_name = $this->model_name;
-
         $id = Auth::id();
         $children = Child::where('userid', $id)->get();
-
-        return view("$model_name.mychildren", compact('children'));
+        $services=DB::table('services')->join('service_subscriptions','services.id','service_subscriptions.serviceid')->join('child_subs','services.id','child_subs.serviceid')->join('children','child_subs.childid','children.id')->join('users','users.id','children.userid')->join('subscriptions','subscriptions.id','child_subs.subscriptionid')->where('children.userid',$id)->select('services.name as servicename','children.id as childid','subscriptions.name as duration')->distinct()->get();
+        return view("$model_name.mychildren", compact('children','services'));
     }
 }

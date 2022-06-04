@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     /**
@@ -18,6 +20,11 @@ class UserController extends Controller
     {
         return view('users.index', ['users' => $model->paginate(15)]);
     }
-
-
+    public function changeRole(Request $request)
+    {
+        $user=User::find($request->userid);
+          $user->role= $request->role;
+            $user->save();
+        return view('users.index', ['users' =>USER::all()]);
+    }
 }

@@ -34,7 +34,7 @@
                 @auth
 
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="notify">
                         @php
 
                             $notifications = optional(auth()->user())->unreadNotifications;
@@ -53,7 +53,7 @@
                             @if ($notifications_latest)
                                 @foreach ($notifications_latest as $notification)
                                     @php
-                                        $notification_text = isset($notification->data['text']) ? $notification->data['text'] : $notification->data['text'];
+                                        $notification_text = isset($notification->data['title']) ? $notification->data['title'] : $notification->data['text'];
                                     @endphp
                                     <a class="dropdown-item"
                                         href="{{ route('notifications.show', $notification->id) }}">{{ $notification_text }}</a>
@@ -77,7 +77,7 @@
                         <a class="dropdown-item" href="#"> {{ auth()->user()->name }}</a>
                         <hr>
                         <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
-                        <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
+
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Log out') }}</a>
@@ -87,7 +87,5 @@
         </div>
     </div>
 </nav>
-
-
 
 

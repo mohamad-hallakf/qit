@@ -29,6 +29,9 @@
                                                 Email
                                             </th>
                                             <th>
+                                              Role
+                                            </th>
+                                              <th>
                                                 Creation date
                                             </th>
                                             <th class="text-right">
@@ -46,13 +49,17 @@
                                                     {{ $user->email }}
                                                 </td>
                                                 <td>
+                                                    {{ $user->role }}
+                                                </td>
+                                                <td>
                                                     {{ $user->created_at }}
                                                 </td>
                                                 <td class="td-actions text-right ">
-                                                    <a rel="tooltip" class="btn btn-success btn-link" href="#"
-                                                        data-id="{{ $user->id }}" title="edit the user">
+                                                    <a rel="tooltip" class="btn btn-success btn-link role"  data-target="#changerole"
+                                                       data-toggle="modal"  data-id="{{ $user->id }}" title="edit the user">
                                                         <span class="bg-white rounded-circle p-2 border-success border "> <i
                                                                 class="fa fa-lg fa-light fa-pen "></i>
+
                                                         </span>
                                                         <div class="ripple-container"></div>
                                                     </a>
@@ -118,6 +125,45 @@
                 </div>
             </div>
         </div>
+         <!-- Modal -->
+        <div class="modal fade border  border border-primary rounded" id="changerole" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  " role="document">
+                <div class="card">
+                    <div class="modal-content">
+
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Change Role</h4>
+                            <p class="card-category">User information</p>
+                        </div>
+                        <form   method="post" action="{{ route('role') }}">
+                            @csrf
+                            <div class="card-body ">
+
+                    <div class="form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text mr-3" id="">اختر الدور</span>
+                            <input type="radio" class="btn-check" name="role" id="success-outlined" value="admin"
+                                >
+                            <label class="btn btn-outline-success" for="success-outlined">ادمن</label>
+
+                            <input type="radio" class="btn-check" name="role" id="danger" value="doctor">
+                            <label class="btn btn-outline-success" for="danger">طبيب</label>
+                                 <input type="radio" class="btn-check" name="role" id="danger-outlined" value="user">
+                            <label class="btn btn-outline-success" for="danger-outlined">مستخدم</label>
+                        </div>
+
+                    </div>
+                        <input type="hidden" value="" id="role" name="userid">
+                            </div>
+                            <div class="card-footer ml-auto mr-auto">
+                                <button type="submit" class="btn btn-primary mx-auto  ">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @push('js')
@@ -127,6 +173,10 @@
                 event.preventDefault();
                 event.stopPropagation();
                 formValidtor("adduser", ["name", "email", "password"])
+            });
+             $(document).on('click', '.role', function() {
+                 console.log($(this).attr('data-id'))
+               $('#role').val( $(this).attr('data-id'))
             });
         });
     </script>

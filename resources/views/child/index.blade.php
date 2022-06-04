@@ -7,16 +7,10 @@
             <div class=" row   bg-gray m-1 mb-2 rounded pb-0 ">
 
 
-                <!-- Button trigger modal -->
-                <span data-toggle="tooltip" data-placement="auto" class="h3 text-muted">
-
-                    <button type="button" class="btn btn-success p-2 rounded-circle" data-toggle="modal"
-                        data-target="#addmodel" id='internalAdding'>
-                        <i class="fas fa-plus-circle fa-2x"></i>
-                    </button>
-                    اضافة خدمة
-                </span>
-
+                <div class="col-11  mt-2">
+                    <h1 class="text-muted  text-lg  ">سجل الاطفال</h1>
+                </div>
+<hr>
             </div>
 
 
@@ -41,7 +35,7 @@
 @endsection
 @push('js')
     <div>
-        @include('child.add-child')
+
         @include('child.delete-child')
         @include('child.edit-child')
     </div>

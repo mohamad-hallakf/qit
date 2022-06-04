@@ -1,8 +1,11 @@
 @extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
 
 @section('content')
+
+
     @if (auth()->user()->role != 'admin')
         <div class="content">
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
@@ -39,35 +42,38 @@
                                     <div class="tab-pane active" id="free">
                                         <div class="row">
                                             @foreach ($services as $service)
-                                            @if ($service->type=="free")
-                                                <div class="col-md-4">
-                                                    <div class="card card-chart">
-                                                        <div class="card-header card-header-success   p-2">
+                                                @if ($service->type == 'free')
+                                                    <div class="col-md-4">
+                                                        <div class="card card-chart">
+                                                            <div class="card-header card-header-success   p-2">
 
-                                                           @if($service->image)
-                                                           <img src="{{asset('storage/'.$service->image)}}" class="rounded" style="width:100%;height: 200px;">
-                                                           @else
-                                                           <img src="{{asset('material/img/ex1.png')}}" class="rounded" style="width:100%;height: 200px;">
+                                                                @if ($service->image)
+                                                                    <img src="{{ asset('storage/' . $service->image) }}"
+                                                                        class="rounded"
+                                                                        style="width:100%;height: 200px;">
+                                                                @else
+                                                                    <img src="{{ asset('material/img/ex1.png') }}"
+                                                                        class="rounded"
+                                                                        style="width:100%;height: 200px;">
+                                                                @endif
 
-                                                           @endif
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">{{ $service->name }}</h4>
+                                                                <p class="card-category">{{ $service->description }}</p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div class="stats mx-auto">
+                                                                    <a type="button" class="btn btn-outline-success"
+                                                                        href="{{ $service->link }}">
+                                                                        <i class="fa-solid fa-right-to-bracket   mx-2"></i>
+                                                                        <span class="h5"> تصفح الخدمة </span>
+                                                                    </a>
 
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">{{ $service->name }}</h4>
-                                                            <p class="card-category">{{ $service->description }}</p>
-                                                        </div>
-                                                        <div class="card-footer">
-                                                            <div class="stats mx-auto">
-                                                                <button type="button" class="btn btn-outline-success">
-                                                                    <i class="fa-solid fa-right-to-bracket   mx-2"></i>
-                                                                    <span class="h6">go to
-                                                                        service </span>
-                                                                </button>
-
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @endif
                                             @endforeach
 
@@ -76,35 +82,41 @@
                                     <div class="tab-pane" id="paid">
                                         <div class="row">
                                             @foreach ($services as $service)
-                                            @if ($service->type=="paid")
-                                                <div class="col-md-4">
-                                                    <div class="card card-chart">
-                                                        <div class="card-header card-header-danger   p-2">
+                                                @if ($service->type == 'paid')
+                                                    <div class="col-md-4">
+                                                        <div class="card card-chart">
+                                                            <div class="card-header card-header-danger   p-2">
 
-                                                           @if($service->image)
-                                                           <img src="{{asset('storage/'.$service->image)}}" class="rounded" style="width:100%;height: 200px;">
-                                                            @else
-                                                           <img src="{{asset('material/img/ex1.png')}}" class="rounded" style="width:100%;height: 200px;">
+                                                                @if ($service->image)
+                                                                    <img src="{{ asset('storage/' . $service->image) }}"
+                                                                        class="rounded"
+                                                                        style="width:100%;height: 200px;">
+                                                                @else
+                                                                    <img src="{{ asset('material/img/ex1.png') }}"
+                                                                        class="rounded"
+                                                                        style="width:100%;height: 200px;">
+                                                                @endif
 
-                                                           @endif
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">{{ $service->name }}</h4>
+                                                                <p class="card-category">{{ $service->description }}</p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div class="stats mx-auto">
+                                                                    <a type="button"
+                                                                        class="btn btn-outline-danger paidservice" href="#"
+                                                                        data-toggle="modal"
+                                                                        data-target="#servicesubscription"
+                                                                        data-id="{{ $service->id }}">
+                                                                        <i class="fa-solid fa-right-to-bracket   mx-2"></i>
+                                                                        <span class="h5">اشتراك</span>
+                                                                    </a>
 
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">{{ $service->name }}</h4>
-                                                            <p class="card-category">{{ $service->description }}</p>
-                                                        </div>
-                                                        <div class="card-footer">
-                                                            <div class="stats mx-auto">
-                                                                <button type="button" class="btn btn-outline-danger">
-                                                                    <i class="fa-solid fa-right-to-bracket   mx-2"></i>
-                                                                    <span class="h6">go to
-                                                                        service </span>
-                                                                </button>
-
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @endif
                                             @endforeach
 
@@ -115,458 +127,174 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                {{-- <div class="row">
+                    <!-- Modal -->
+                    <div class="modal fade border  border border-danger rounded" id="servicesubscription" tabindex="-1"
+                        role="dialog">
+                        <div class="modal-dialog   " role="document">
+                            <div class="card">
+                                <div class="modal-content">
 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-warning card-header-icon">
-                                <div class="card-icon">
-                                    <i class="material-icons">content_copy</i>
-                                </div>
-                                <p class="card-category">Used Space</p>
-                                <h3 class="card-title">49/50
-                                    <small>GB</small>
+                                    <div class="card-header card-header-danger">
+                                        <h3 class="card-title">اشتراك بالخدمة</h3>
+                                        <p class="card-category h5">ادخل المعلومات اللازمة للاشتراك </p>
+                                    </div>
 
-                                </h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons text-danger">warning</i>
-                                    <a href="#pablo">Get More Space...</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <form id="addservicesubscription" method="POST"
+                                        action="{{ route('ChildSub.store') }}" enctype="multipart/form-data"
+                                        class="text-dark">
+                                        @csrf
+                                        <div class="card-body ">
 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-success card-header-icon">
-                                <div class="card-icon">
-                                    <i class="material-icons">store</i>
-                                </div>
-                                <p class="card-category">Revenue</p>
-                                <h3 class="card-title">$34,245</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">date_range</i> Last 24 Hours
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-danger card-header-icon">
-                                <div class="card-icon">
-                                    <i class="material-icons">info_outline</i>
-                                </div>
-                                <p class="card-category">Fixed Issues</p>
-                                <h3 class="card-title">75</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">local_offer</i> Tracked from Github
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-info card-header-icon">
-                                <div class="card-icon">
-                                    <i class="fa fa-twitter"></i>
-                                </div>
-                                <p class="card-category">Followers</p>
-                                <h3 class="card-title">+245</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">update</i> Just Updated
+
+
+                                            <div class="form-group my-2 input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">اختر الطفل</span>
+                                                </div>
+
+                                                @if ($children != '[]')
+                                                    <select class="form-select form-control text-center" name='childid'
+                                                        required>
+                                                        @foreach ($children as $child)
+                                                            <option selected value="{{ $child->id }}">
+                                                                {{ $child->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @else
+                                                    <div class="stats mx-auto">
+                                                        <a type="button" class="btn btn-outline-success"
+                                                            href="{{ route('child.mychildren') }}">
+                                                            <i class="fa-solid fa-right-to-bracket   mx-2"></i>
+                                                            <span class="h5">ادخل معلومات طفلك اولا</span>
+                                                        </a>
+
+                                                    </div>
+                                                @endif
+
+                                            </div>
+
+                                            @if ($children != '[]')
+                                                <div class="form-group my-2 input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id=""> نوع الاشتراك</span>
+                                                    </div>
+                                                    <select class="form-select form-control text-center" name='subid'
+                                                        required>
+                                                    </select>
+                                                </div>
+                                            @endif
+                                            <input type="hidden" name="serviceid" id="serviceid">
+
+                                            <div class="form-group my-2 input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="">اختر الاجهزة</span>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        كاميرا
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        حساس صوت
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <p>
+
+                                                <button class="btn btn-outline-secondary h5 p-1 float-left" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                                    aria-expanded="false" aria-controls="collapseExample">تفاصيل
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="collapseExample">
+                                                <div class="card card-body">
+                                                    <p class="font-weight-bold h4">
+                                                        نقدم لكم في هذه السطور نظرة سريعة لتوضيح كيفية الاستفادة من هذه
+                                                        الأجهزة
+                                                        وتحقيق الاستخدام الأمثل لها...</p>
+                                                    <p> 1..كاميرا..وفيها يتم مراقبة الطفل بحيث يصبح الأهل على دراية كاملة
+                                                        بكافة
+                                                        تحركاته لإتخاذ الإجراءات المناسبة في حال حدوث أي داعي لذلك</p>
+                                                    <p> 2..جهاز مراقبة الحركة..حيث يتم تحديد مسافة آمنة للطفل من خلال هذا
+                                                        الجهاز
+                                                        وفي حال تم تجاوز هذه المسافة من قبل الطفل فيتم إصدار إنذار لتنبيه
+                                                        الأهل
+                                                        لحماية الطفل من أي اصطدام تفاديا لأي أذى جسدي يمكن أن ينتج عن حركته
+                                                    </p>
+                                                    <p>
+                                                        3..جهاز تحكم بالمحيط..يقوم بفتح نوافذ الغرفة في الصباح لتأمين بيئة
+                                                        صحية
+                                                        للطفل من حيث هواء وأشعة الشمس وما ضمن ذلك ثم يقوم بإغلاقها بعد فترة
+                                                        معينة يتم تحديدها مسبقا</p>
+                                                    <p> 4..جهاز مراقبة الصوت..يتم من خلاله التحسس لوجود صوت صادر عن الطفل
+                                                        حيث
+                                                        يتم تشغيل إضاءة في حال التحسس لأي صوت
+                                                        ...وننوه إلى أنه في جميع الأجهزة السابقة يتم التحكم بها من قبل آدمن
+                                                        التطبيق وكذلك يقوم باتخاذ الإجراءات المناسبة في حال حدوث أي طارئ
+                                                        تبعا
+                                                        للجهاز المستخدم</p>
+
+                                                    <p class="font-weight-bold h5">
+                                                        ومن المؤكد أننا نراعي خصوصية المستخدم حيث يمكن إيقاف جميع الأجهزة
+                                                        السابقة بمحرد فصل التيار الكهربائي عنها</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer ml-auto mr-auto">
+                                            @if ($children != '[]')
+                                                <button type="submit" class="btn btn-danger mx-auto ">حفظ</button>
+                                            @endif
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                            <div class="card-header card-header-success">
-                                <div class="ct-chart" id="dailySalesChart"></div>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Daily Sales</h4>
-                                <p class="card-category">
-                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in
-                                    today sales.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                            <div class="card-header card-header-warning">
-                                <div class="ct-chart" id="websiteViewsChart"></div>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Email Subscriptions</h4>
-                                <p class="card-category">Last Campaign Performance</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                            <div class="card-header card-header-danger">
-                                <div class="ct-chart" id="completedTasksChart"></div>
-                            </div>
-                            <div class="card-body">
-                                <h4 class="card-title">Completed Tasks</h4>
-                                <p class="card-category">Last Campaign Performance</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-header card-header-tabs card-header-primary">
-                                <div class="nav-tabs-navigation">
-                                    <div class="nav-tabs-wrapper">
-                                        <span class="nav-tabs-title">Tasks:</span>
-                                        <ul class="nav nav-tabs" data-tabs="tabs">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" href="#profile" data-toggle="tab">
-                                                    <i class="material-icons">bug_report</i> Bugs
-                                                    <div class="ripple-container"></div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#messages" data-toggle="tab">
-                                                    <i class="material-icons">code</i> Website
-                                                    <div class="ripple-container"></div>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#settings" data-toggle="tab">
-                                                    <i class="material-icons">cloud</i> Server
-                                                    <div class="ripple-container"></div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="profile">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked>
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value="">
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value="">
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Flooded: One year later, assessing what was lost and what was found
-                                                        when
-                                                        a ravaging rain swept through metro Detroit
-                                                    </td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked>
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane" id="messages">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked>
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Flooded: One year later, assessing what was lost and what was found
-                                                        when
-                                                        a ravaging rain swept through metro Detroit
-                                                    </td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value="">
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="tab-pane" id="settings">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value="">
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked>
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Flooded: One year later, assessing what was lost and what was found
-                                                        when
-                                                        a ravaging rain swept through metro Detroit
-                                                    </td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <label class="form-check-label">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    checked>
-                                                                <span class="form-check-sign">
-                                                                    <span class="check"></span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" rel="tooltip" title="Edit Task"
-                                                            class="btn btn-primary btn-link btn-sm">
-                                                            <i class="material-icons">edit</i>
-                                                        </button>
-                                                        <button type="button" rel="tooltip" title="Remove"
-                                                            class="btn btn-danger btn-link btn-sm">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-header card-header-warning">
-                                <h4 class="card-title">Employees Stats</h4>
-                                <p class="card-category">New employees on 15th September, 2016</p>
-                            </div>
-                            <div class="card-body table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="text-warning">
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Salary</th>
-                                        <th>Country</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Dakota Rice</td>
-                                            <td>$36,738</td>
-                                            <td>Niger</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Minerva Hooper</td>
-                                            <td>$23,789</td>
-                                            <td>Curaçao</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sage Rodriguez</td>
-                                            <td>$56,142</td>
-                                            <td>Netherlands</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Philip Chaney</td>
-                                            <td>$38,735</td>
-                                            <td>Korea, South</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+
             </div>
         </div>
     @elseif(auth()->user()->role == 'admin')
         <div class="content">
-            <div class="container-fluid">
-                hello i'm admin
+            <div class="row justify-content-center">
+                <div class="card card-stats col-3 mx-3 ">
+                    <div class="card-header  card-header-icon mx-auto">
+                        <div class="card-icon rounded-circle mx-auto bg-white shadow mb-2">
+                            <i class="fa-solid fa-child   text-success" id="lighticon"></i>
+                        </div>
+                    </div>
+                    <h4 class="card-footer text-center mx-auto   text-primary ">
+                        عدد الاطفال: {{ $childrens->count()}}
+                    </h4>
+                </div>
+                   <div class="card card-stats col-3  mx-3 ">
+                    <div class="card-header  card-header-icon mx-auto">
+                        <div class="card-icon rounded-circle mx-auto bg-white shadow mb-2">
+                            <i class="fa-solid fa-star   text-warning" id="lighticon"></i>
+                        </div>
+                    </div>
+                    <h4 class="card-footer text-center mx-auto   text-primary ">
+                        عدد الخدمات: {{$services->count()}}
+                    </h4>
+                </div>
+                   <div class="card card-stats col-3  mx-3 ">
+                    <div class="card-header  card-header-icon mx-auto">
+                        <div class="card-icon rounded-circle mx-auto bg-white shadow mb-2">
+                            <i class="fa-solid fa-user   text-info" id="lighticon"></i>
+                        </div>
+                    </div>
+                    <h4 class="card-footer text-center mx-auto   text-primary ">
+                        عدد المستخدمين: {{$users->count()}}
+                    </h4>
+                </div>
             </div>
         </div>
     @endif
@@ -574,8 +302,89 @@
 
 @push('js')
     <script>
+        //   demo.initDocumentationCharts();
+        function chart() {
+            if ($('#dailySalesChart').length != 0 && $('#websiteViewsChart').length != 0) {
+                /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+
+                dataDailySalesChart = {
+                    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+                    series: [
+                        [12, 17, 7, 17, 23, 18, 38],
+
+
+                    ]
+                };
+
+
+                newDailySalesChart = {
+                    series: ['M', 'T', 'W', 'T', 'M', 'T', 'W', 'T', 'F', 'S', 'j', 'F', 'S', 'S', 'F', 'S', 'j', 'F',
+                        'S', 'S'
+                    ],
+                    series: [
+                        [12, 7, 17, 2, 2, 7, 17, 2, 3, 38, 17, 7, 17, 2, 2, 7, 17, 2, 3, 38],
+                    ]
+                };
+
+                optionsDailySalesChart = {
+                    lineSmooth: Chartist.Interpolation.cardinal({
+                        tension: 0
+                    }),
+
+
+                    low: 0,
+                    fullWidth: true,
+                    showLabel: true,
+                    high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+                    chartPadding: {
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                    },
+                    showLine: false,
+
+                }
+
+                var dailySalesChart = new Chartist.Line('#dailySalesChart', newDailySalesChart, optionsDailySalesChart);
+
+                // var animationHeaderChart = new Chartist.Line('#websiteViewsChart', dataDailySalesChart, optionsDailySalesChart);
+            }
+        }
+        chart()
         $(document).ready(function() {
-            // Javascript method's body can be found in assets/js/demos.js
+            $(document).on("click", ".paidservice", function(e) {
+
+                var id = $(this).attr("data-id")
+
+                $("#addservicesubscription #serviceid").val(id)
+                $("#addservicesubscription select[name= subid]").html("")
+                data = {
+                    'id': id
+                }
+                $.ajax({
+                    url: "{{ route('Subscription.subsType') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    data,
+                    data,
+                    success: function(data) {
+                        if (data.response == true) {
+
+                            $.each(data.data, function(index, value) {
+
+                                $("#addservicesubscription select[name= subid]").append(
+                                    '  <option value="' + value.id + '">' + value
+                                    .name + " كلفة الاشتراك " + value.price +
+                                    '</option>'
+                                )
+
+                            });
+
+                        } else {}
+                    }
+                });
+            })
 
         });
     </script>

@@ -11,33 +11,44 @@
              <div class="modal-body">
                  <form class="m-2 font-weight-bold " id="editForm">
 
-                    <div class="form-group">
+                    <div class="form-group my-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="">{{__('clients.name')}}</span>
+                                <span class="input-group-text" id="">{{__('tr.name')}}</span>
                             </div>
-                            <input type="text" placeholder="{{__('clients.name')}}" name="name" class="form-control ">
+                            <input type="text" placeholder="{{__('tr.name')}}" name="name" class="form-control ">
 
 
                         </div>
                     </div>
 
+                    <div class="form-group my-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">{{__('tr.type')}}</span>
+                            </div>
+                            <input type="text" placeholder="{{__('tr.type')}}" name="type" class="form-control ">
 
 
-                    <div class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="">{{__('clients.farm name')}}</span>
                         </div>
-                    <select class="form-select form-control"  name='farmid'>
-                        <option selected value="noselect">{{__('clients.selectone')}}</option>
-
-                      </select>
                     </div>
+
+                    <div class="form-group my-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">{{__('tr.description')}}</span>
+                            </div>
+                            <input type="text" placeholder="{{__('tr.description')}}" name="description" class="form-control ">
+
+
+                        </div>
+                    </div>
+
 
                      <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-lg btn-danger" req="no" data-dismiss="modal"
-                            id="closeAdding">{{__('clients.close')}}</button>
-                        <button type="button" id="okEdit" req="no" class="btn btn-lg btn-success">{{__('clients.save')}}</button>
+                        <button type="button" class="btn  btn-danger" req="no" data-dismiss="modal"
+                            id="closeAdding">{{__('tr.close')}}</button>
+                        <button type="button" id="okEdit" req="no" class="btn  btn-success">{{__('tr.save')}}</button>
                     </div>
                      <input type="hidden" id="theID" req="no" name="id" />
                  </form>

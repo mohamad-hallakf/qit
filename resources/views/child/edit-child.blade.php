@@ -14,9 +14,9 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="">{{__('clients.name')}}</span>
+                                <span class="input-group-text" id="">{{__('tr.name')}}</span>
                             </div>
-                            <input type="text" placeholder="{{__('clients.name')}}" name="name" class="form-control ">
+                            <input type="text" placeholder="{{__('tr.name')}}" name="name" class="form-control ">
 
 
                         </div>
@@ -24,20 +24,21 @@
 
 
 
-                    <div class="form-group input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="">{{__('clients.farm name')}}</span>
-                        </div>
-                    <select class="form-select form-control"  name='farmid'>
-                        <option selected value="noselect">{{__('clients.selectone')}}</option>
+                    <div class="form-group my-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="">{{__('tr.dateofbirth')}}</span>
+                            </div>
+                            <input type="date" placeholder="{{__('tr.dateofbirth')}}" name="dateofbirth" class="form-control ">
 
-                      </select>
+
+                        </div>
                     </div>
 
                      <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-lg btn-danger" req="no" data-dismiss="modal"
-                            id="closeAdding">{{__('clients.close')}}</button>
-                        <button type="button" id="okEdit" req="no" class="btn btn-lg btn-success">{{__('clients.save')}}</button>
+                            id="closeAdding">{{__('tr.close')}}</button>
+                        <button type="button" id="okEdit" req="no" class="btn btn-lg btn-success">{{__('tr.save')}}</button>
                     </div>
                      <input type="hidden" id="theID" req="no" name="id" />
                  </form>

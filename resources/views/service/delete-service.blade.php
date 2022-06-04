@@ -6,15 +6,15 @@ aria-hidden="true">
         <div class="modal-content" >
             <div class="modal-header">
 
-                <h4 class="modal-title"> {{ __('clients.delete') }}</h4>
+                <h4 class="modal-title"> {{ __('tr.delete') }}</h4>
             </div>
             <div class="modal-body">
-                <p class="font-weight-bold">{{ __('clients.deleteconfirm') }}
+                <p class="font-weight-bold">{{ __('tr.deleteconfirm') }}
                 </p>
             </div>
             <div class="modal-footer">    @csrf
-                <button type="button" data-id="" id="okDelete" class="btn btn-danger" data-dismiss="modal">{{ __('clients.ok') }}</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">{{ __('clients.cancel') }}</button>
+                <button type="button" data-id="" id="okDelete" class="btn btn-danger" data-dismiss="modal">{{ __('tr.ok') }}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">{{ __('tr.cancel') }}</button>
 
             </div>
         </div>
