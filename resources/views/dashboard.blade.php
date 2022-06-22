@@ -47,15 +47,11 @@
                                                         <div class="card card-chart">
                                                             <div class="card-header card-header-success   p-2">
 
-                                                                @if ($service->image)
-                                                                    <img src="{{ asset('storage/' . $service->image) }}"
+
+                                                                    <img src="{{ url('hard.jpg') }}"
                                                                         class="rounded"
                                                                         style="width:100%;height: 200px;">
-                                                                @else
-                                                                    <img src="{{ asset('material/img/ex1.png') }}"
-                                                                        class="rounded"
-                                                                        style="width:100%;height: 200px;">
-                                                                @endif
+
 
                                                             </div>
                                                             <div class="card-body">
@@ -87,15 +83,10 @@
                                                         <div class="card card-chart">
                                                             <div class="card-header card-header-danger   p-2">
 
-                                                                @if ($service->image)
-                                                                    <img src="{{ asset('storage/' . $service->image) }}"
+
+                                                                    <img src="{{ url('hard.jpg') }}"
                                                                         class="rounded"
                                                                         style="width:100%;height: 200px;">
-                                                                @else
-                                                                    <img src="{{ asset('material/img/ex1.png') }}"
-                                                                        class="rounded"
-                                                                        style="width:100%;height: 200px;">
-                                                                @endif
 
                                                             </div>
                                                             <div class="card-body">
@@ -185,68 +176,120 @@
                                             @endif
                                             <input type="hidden" name="serviceid" id="serviceid">
 
-                                            <div class="form-group my-2 input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="">اختر الاجهزة</span>
+
+                                            <div id="hardwareService">
+                                                <div class="form-group my-4 input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text h4" id="">اختر الاجهزة</span>
+                                                    </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                كاميرا
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckDefault1">
+                                                            <label class="form-check-label" for="flexCheckDefault1">
+                                                                مراقبة حركة
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckChecked2">
+                                                            <label class="form-check-label" for="flexCheckChecked2">
+                                                                مراقبة صوت
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckChecked3">
+                                                            <label class="form-check-label" for="flexCheckChecked3">
+                                                                مراقبة حرارة ورطوبة
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckChecked4">
+                                                            <label class="form-check-label" for="flexCheckChecked4">
+                                                                التحكم بالاضاءة
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckChecked5">
+                                                            <label class="form-check-label" for="flexCheckChecked5">
+                                                                التحكم بالتكييف
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value=""
+                                                                id="flexCheckChecked6">
+                                                            <label class="form-check-label" for="flexCheckChecked6">
+                                                                التحكم بالنافذة
+                                                            </label>
+                                                        </div>
+
+                                                </div>
+                                                <p>
+
+                                                    <button class="btn btn-outline-secondary h5 p-1 float-left"
+                                                        type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseExample" aria-expanded="false"
+                                                        aria-controls="collapseExample">تفاصيل
+                                                    </button>
+                                                </p>
+                                                <div class="collapse" id="collapseExample">
+                                                    <div class="card card-body">
+                                                        <p class="font-weight-bold h4">
+                                                            نقدم لكم في هذه السطور نظرة سريعة لتوضيح كيفية الاستفادة من هذه
+                                                            الأجهزة
+                                                            وتحقيق الاستخدام الأمثل لها...</p>
+                                                        <p> 1..كاميرا..وفيها يتم مراقبة الطفل بحيث يصبح الأهل على دراية
+                                                            كاملة
+                                                            بكافة
+                                                            تحركاته لإتخاذ الإجراءات المناسبة في حال حدوث أي داعي لذلك</p>
+                                                        <p> 2..جهاز مراقبة الحركة..حيث يتم تحديد مسافة آمنة للطفل من خلال
+                                                            هذا
+                                                            الجهاز
+                                                            وفي حال تم تجاوز هذه المسافة من قبل الطفل فيتم إصدار إنذار
+                                                            لتنبيه
+                                                            الأهل
+                                                            لحماية الطفل من أي اصطدام تفاديا لأي أذى جسدي يمكن أن ينتج عن
+                                                            حركته
+                                                        </p>
+                                                        <p>
+                                                            3..جهاز تحكم بالمحيط..يقوم بفتح نوافذ الغرفة في الصباح لتأمين
+                                                            بيئة
+                                                            صحية
+                                                            للطفل من حيث هواء وأشعة الشمس وما ضمن ذلك ثم يقوم بإغلاقها بعد
+                                                            فترة
+                                                            معينة يتم تحديدها مسبقا</p>
+                                                        <p> 4..جهاز مراقبة الصوت..يتم من خلاله التحسس لوجود صوت صادر عن
+                                                            الطفل
+                                                            حيث
+                                                            يتم تشغيل إضاءة في حال التحسس لأي صوت
+                                                            ...وننوه إلى أنه في جميع الأجهزة السابقة يتم التحكم بها من قبل
+                                                            آدمن
+                                                            التطبيق وكذلك يقوم باتخاذ الإجراءات المناسبة في حال حدوث أي طارئ
+                                                            تبعا
+                                                            للجهاز المستخدم</p>
+
+                                                        <p class="font-weight-bold h5">
+                                                            ومن المؤكد أننا نراعي خصوصية المستخدم حيث يمكن إيقاف جميع
+                                                            الأجهزة
+                                                            السابقة بمحرد فصل التيار الكهربائي عنها</p>
+                                                    </div>
                                                 </div>
 
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        كاميرا
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckChecked">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        حساس صوت
-                                                    </label>
-                                                </div>
 
                                             </div>
 
-                                            <p>
 
-                                                <button class="btn btn-outline-secondary h5 p-1 float-left" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                                                    aria-expanded="false" aria-controls="collapseExample">تفاصيل
-                                                </button>
-                                            </p>
-                                            <div class="collapse" id="collapseExample">
-                                                <div class="card card-body">
-                                                    <p class="font-weight-bold h4">
-                                                        نقدم لكم في هذه السطور نظرة سريعة لتوضيح كيفية الاستفادة من هذه
-                                                        الأجهزة
-                                                        وتحقيق الاستخدام الأمثل لها...</p>
-                                                    <p> 1..كاميرا..وفيها يتم مراقبة الطفل بحيث يصبح الأهل على دراية كاملة
-                                                        بكافة
-                                                        تحركاته لإتخاذ الإجراءات المناسبة في حال حدوث أي داعي لذلك</p>
-                                                    <p> 2..جهاز مراقبة الحركة..حيث يتم تحديد مسافة آمنة للطفل من خلال هذا
-                                                        الجهاز
-                                                        وفي حال تم تجاوز هذه المسافة من قبل الطفل فيتم إصدار إنذار لتنبيه
-                                                        الأهل
-                                                        لحماية الطفل من أي اصطدام تفاديا لأي أذى جسدي يمكن أن ينتج عن حركته
-                                                    </p>
-                                                    <p>
-                                                        3..جهاز تحكم بالمحيط..يقوم بفتح نوافذ الغرفة في الصباح لتأمين بيئة
-                                                        صحية
-                                                        للطفل من حيث هواء وأشعة الشمس وما ضمن ذلك ثم يقوم بإغلاقها بعد فترة
-                                                        معينة يتم تحديدها مسبقا</p>
-                                                    <p> 4..جهاز مراقبة الصوت..يتم من خلاله التحسس لوجود صوت صادر عن الطفل
-                                                        حيث
-                                                        يتم تشغيل إضاءة في حال التحسس لأي صوت
-                                                        ...وننوه إلى أنه في جميع الأجهزة السابقة يتم التحكم بها من قبل آدمن
-                                                        التطبيق وكذلك يقوم باتخاذ الإجراءات المناسبة في حال حدوث أي طارئ
-                                                        تبعا
-                                                        للجهاز المستخدم</p>
-
-                                                    <p class="font-weight-bold h5">
-                                                        ومن المؤكد أننا نراعي خصوصية المستخدم حيث يمكن إيقاف جميع الأجهزة
-                                                        السابقة بمحرد فصل التيار الكهربائي عنها</p>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="card-footer ml-auto mr-auto">
                                             @if ($children != '[]')
@@ -272,27 +315,27 @@
                         </div>
                     </div>
                     <h4 class="card-footer text-center mx-auto   text-primary ">
-                        عدد الاطفال: {{ $childrens->count()}}
+                        عدد الاطفال: {{ $childrens->count() }}
                     </h4>
                 </div>
-                   <div class="card card-stats col-3  mx-3 ">
+                <div class="card card-stats col-3  mx-3 ">
                     <div class="card-header  card-header-icon mx-auto">
                         <div class="card-icon rounded-circle mx-auto bg-white shadow mb-2">
                             <i class="fa-solid fa-star   text-warning" id="lighticon"></i>
                         </div>
                     </div>
                     <h4 class="card-footer text-center mx-auto   text-primary ">
-                        عدد الخدمات: {{$services->count()}}
+                        عدد الخدمات: {{ $services->count() }}
                     </h4>
                 </div>
-                   <div class="card card-stats col-3  mx-3 ">
+                <div class="card card-stats col-3  mx-3 ">
                     <div class="card-header  card-header-icon mx-auto">
                         <div class="card-icon rounded-circle mx-auto bg-white shadow mb-2">
                             <i class="fa-solid fa-user   text-info" id="lighticon"></i>
                         </div>
                     </div>
                     <h4 class="card-footer text-center mx-auto   text-primary ">
-                        عدد المستخدمين: {{$users->count()}}
+                        عدد المستخدمين: {{ $users->count() }}
                     </h4>
                 </div>
             </div>
@@ -356,7 +399,10 @@
             $(document).on("click", ".paidservice", function(e) {
 
                 var id = $(this).attr("data-id")
-
+                if (id != 2)
+                    $('#hardwareService').hide()
+                else
+                    $('#hardwareService').show()
                 $("#addservicesubscription #serviceid").val(id)
                 $("#addservicesubscription select[name= subid]").html("")
                 data = {

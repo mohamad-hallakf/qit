@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'services' ])
+@extends('layouts.app', ['activePage' => 'questionsIndex' ])
 @section('content')
     <div class="content">
 

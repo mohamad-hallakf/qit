@@ -9,12 +9,12 @@ aria-hidden="true">
                 <h4 class="modal-title"> حذف السؤال</h4>
             </div>
             <div class="modal-body">
-                <p class="font-weight-bold">{{ __('clients.deleteconfirm') }}
+                <p class="font-weight-bold">سيتم حذف السؤال بشكل نهائي
                 </p>
             </div>
             <div class="modal-footer">    @csrf
-                <button type="button" data-id="" id="okDelete" class="btn btn-danger" data-dismiss="modal">{{ __('clients.ok') }}</button>
-                <button type="button" class="btn btn-info" data-dismiss="modal">{{ __('clients.cancel') }}</button>
+                <button type="button" data-id="" id="okDelete" class="btn btn-danger" data-dismiss="modal">موافق</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">رجوع</button>
 
             </div>
         </div>

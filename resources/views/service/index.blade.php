@@ -6,7 +6,7 @@
 
             <div class=" row   bg-gray m-1 mb-2 rounded pb-0 ">
                 <div class="col-10  mt-2">
-                    <h1 class="text-muted  text-lg h1  "> سجل الخدمات </h1>
+                    <h1 class="text-muted  text-lg h1  " style="color: blue !important"> سجل الخدمات </h1>
                 </div>
                 <div class="col-2 mt-2 text-center">
 

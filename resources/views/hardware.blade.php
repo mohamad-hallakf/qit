@@ -81,41 +81,60 @@
                 <div class="col-lg-6 col-sm-6">
                     <div class="row">
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats  ">
                                 <div class="card-header  card-header-icon mx-auto">
                                     <div class="card-icon rounded-circle mx-auto bg-white shadow  ">
                                         <i class="fa-solid fa-temperature-three-quarters text-danger"></i>
                                     </div>
                                     <h2 class="card-title text-center my-3 pt-2 text-danger">
-                                        <span class="font-mono "> <span id="temp">30</span>  &#176;</span>
-                                        <span class=" font-weight-bold text-danger pr-2 h3">درجة الحرارة</span>
+
+                                        <h3 class=" font-weight-bold text-danger pr-2  h3 d-block"> <span id="temp">30</span>  حرارة الغرفة</h3>
 
                                     </h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats  ">
                                 <div class="card-header  card-header-icon mx-auto">
                                     <div class="card-icon rounded-circle mx-auto bg-white shadow  ">
-                                        <i class="fa-solid fa-house-medical text-warning"></i>
+                                        <i class=" fa-solid fa-temperature-three-quarters text-warning"></i>
                                     </div>
                                     <h2 class="card-title text-center my-3 pt-2 text-warning">
-                                        <span class="font-mono pr-2 "> 10&#176;</span>
+
+
+                                        <h3 class=" font-weight-bold text-danger pr-2  d-block"> <span id="humidity">30</span>  رطوبة الغرفة</h3>
+
                                     </h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="card card-stats  ">
                                 <div class="card-header  card-header-icon mx-auto">
                                     <div class="card-icon rounded-circle mx-auto bg-white shadow  ">
-                                        <i class="fa-solid fa-heart-pulse text-danger    "></i>
+                                        <i id="sound" class="fa-solid  fa-volume-xmark text-danger"></i>
                                     </div>
                                     <h2 class="card-title text-center my-3 pt-2 text-danger ">
-                                        <span class="font-mono pr-2 "> 34&#176;</span>
+
+                                        <span class=" font-weight-bold text-danger pr-2  h3">الصوت</span>
                                     </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="card card-stats  ">
+                                <div class="card-header  card-header-icon mx-auto">
+                                    <div class="card-icon rounded-circle mx-auto bg-white shadow  ">
+                                        <i id="distance" class="fa-solid fa-bed text-danger    "></i>
+                                    </div>
+                                    <h4 class="card-title text-center my-3 pt-2 text-danger  ">
+                                        <span>
+                                            مسافة الامان
+                                        </span>
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +159,7 @@
                             <div class="card card-stats  ">
                                 <div class="card-header  card-header-icon mx-auto">
                                     <div class="card-icon rounded-circle mx-auto bg-white shadow">
-                                        <i class="fa-solid fa-lightbulb    text-success" id="lighticon"></i>
+                                        <i class="fa-solid   fa-lightbulb text-success" id="lighticon"></i>
 
                                     </div>
                                     <h2 class="card-title text-center my-3 pt-2 text-primary ">
@@ -168,6 +187,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -188,16 +208,16 @@
 
                             <div class="modal-footer justify-content-center m-0 p-0">
                                 <a type="button" onclick="saveimage()" class=" h3 btn bg-transparent " title="حفظ الصورة"
-                                    id="play"><i class="fa-solid fa-save fa-1x text-warning"></i></a>
+                                    id="play"><i class="fa-solid fa-save fa-2x text-warning"></i></a>
                                 <button type="button" onclick="getStream('video')" class=" h3 btn bg-transparent "
                                     title="تشغيل البث" id="play"><i
-                                        class="fa-solid fa-play fa-1x text-success"></i></button>
+                                        class="fa-solid fa-play fa-2x text-success"></i></button>
 
                                 <button type="button" onclick="stopStream('video')" class=" h3 btn bg-transparent "
-                                    title="ايقاف البث" id="stop"><i class="fa-solid fa-stop fa-1x text-danger"></i></button>
+                                    title="ايقاف البث" id="stop"><i class="fa-solid fa-stop fa-2x text-danger"></i></button>
                                 <button type="button" onclick="capture()" class=" h3 btn bg-transparent "
                                     title="التقاط الصورة"><i
-                                        class="fa-solid fa-tablet-screen-button fa-1x text-secondary"></i></button>
+                                        class="fa-solid fa-tablet-screen-button fa-2x text-secondary"></i></button>
                             </div>
                         </div>
                     </div>
@@ -228,7 +248,6 @@
                 $.ajax({
                     url: "{{ route('closeDoor') }}",
                     type: 'get',
-                    success: function(data) {}
                 });
 
             }
@@ -240,15 +259,44 @@
                 //turn on the switch
                 $('#fanicon').removeClass('fa-power-off')
                 $('#fanicon').addClass('fa-fan ')
-
+                $.ajax({
+                    url: "{{ route('fanRun') }}",
+                    type: 'get',
+                });
 
             } else {
                 //turn off the switch
                 $('#fanicon').addClass('fa-power-off')
                 $('#fanicon').removeClass('fa-fan ')
-
+                $.ajax({
+                    url: "{{ route('fanClose') }}",
+                    type: 'get',
+                });
             }
         })
+
+        $(document).on("click", '#light', function() {
+            var checkBox = document.getElementById("light");
+            if (checkBox.checked == true) {
+                //turn on the switch
+                $('#lighticon').removeClass('fa-lightbulb')
+                $('#lighticon').addClass('fa-bolt')
+                $.ajax({
+                    url: "{{ route('ledON') }}",
+                    type: 'get',
+                });
+
+            } else {
+                //turn off the switch
+                $('#lighticon').addClass('fa-lightbulb')
+                $('#lighticon').removeClass('fa-bolt')
+                $.ajax({
+                    url: "{{ route('ledOFF') }}",
+                    type: 'get',
+                });
+            }
+        })
+
 
         function getUserMedia(constraints) {
 
@@ -323,19 +371,32 @@
             $('#imageDiv').hide()
         }
 
-        getSensor()
+   setInterval(getSensor, 5000);
 
-        function getSensor() {
+         function  getSensor() {
             $.ajax({
                 url: "{{ route('sensor') }}",
                 type: 'get',
                 success: function(data) {
                     if (data.response) {
+                        $('#temp').html(data.data.temperature)
+                        $('#humidity').html(data.data.humidity)
+                        if (data.data.sound) {
+                            $('#sound').removeClass('fa-volume-high')
+                            $('#sound').addClass('fa-volume-xmark')
+                        } else {
+                            $('#sound').addClass('fa-volume-high')
+                            $('#sound').removeClass('fa-volume-xmark')
+                        }
+                        if (data.data.distance) {
+                            $('#distance').removeClass('fa-exclamation')
+                            $('#distance').addClass('fa-bed')
+                        } else {
+                            $('#distance').addClass('fa-exclamation')
+                            $('#distance').removeClass('fa-bed')
+                        }
 
-
-
-                       $('#temp').html( data.data.sound)
-                        $('#alert').hide()
+                         $('#alert').hide()
                         $('#control').show()
                     } else {
                         $('#alert').show()
@@ -344,7 +405,7 @@
 
                 }
             });
-            setTimeout(getSensor, 3000);
+
         }
     </script>
 @endpush

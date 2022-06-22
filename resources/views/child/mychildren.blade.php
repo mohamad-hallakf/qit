@@ -65,7 +65,9 @@
                                             <span class="h4"> المدة : {{ $service->duration }}</span>
                                             <a type="button" class="btn btn-outline-success"
                                               @if ($service->servicename=="مراقبة النمو")
-                                                  href={{ route('Chart.child', $child->id) }}>
+                                                  href={{ route('Chart.child', $child->id) }}
+                                                  @else
+                                                      href={{ route('hardware') }}>
                                               @endif
                                                 <i class="fa-solid fa-right-to-bracket   mx-2"></i>
                                                 <span class="h5"> تصفح الخدمة </span>

@@ -220,7 +220,10 @@ return [
     'privacy'              =>  'الخصوصية',
     'common'              =>  'شائع',
     'status'              =>  'معلق',
+    'parent'              =>  'الاب',
+    'subscription'              =>  'الاشتراك',
+    'child'              =>  'الطفل',
     'content'              =>  'المحتوى',
-    ''              =>  '',
+    'dateofbirth'              =>  'تاريخ الميلاد',
 
 ];

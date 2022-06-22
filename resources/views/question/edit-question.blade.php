@@ -30,8 +30,8 @@
                     <input type="hidden" value="" name="id" id="qid">
                      <div class="modal-footer justify-content-center">
                         <button type="button" class="btn  btn-info" req="no" data-dismiss="modal"
-                            id="closeAdding">{{__('clients.close')}}</button>
-                        <button type="button" id="okEdit" req="no" class="btn  btn-danger">{{__('clients.save')}}</button>
+                            id="closeAdding">رجوع</button>
+                        <button type="button" id="okEdit" req="no" class="btn  btn-danger">موافق</button>
                     </div>
                   </form>
              </div>

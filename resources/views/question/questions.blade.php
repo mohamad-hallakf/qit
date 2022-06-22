@@ -25,6 +25,7 @@
                     <P></P>
 
                 @else
+                @if($question->status==0)
                 <div class="row mx-5  " style="margin-right: 0rem !important;">
 
                     <div class="card p-0 ">
@@ -90,8 +91,8 @@
                                     enctype="multipart/form-data" class="text-dark">
                                     @csrf
                                     <div class="form-group my-2  row">
-                                        <button type="submit" class="btn btn-info col-2 ml-5 h4">موافق</button>
-                                        <textarea type="text" class="form-control col-9  m-1 border-1 border-info"
+                                        <button type="submit" class="btn btn-info col-2 mt-1 ml-5 ">موافق</button>
+                                        <textarea type="text" class="form-control col-9 w-75 m-1 border-1 border-info"
                                             id="exampleInputname" name="answer" placeholder="اكتب تعليق ...."
                                             required></textarea>
 
@@ -105,6 +106,7 @@
                     </div>
 
                 </div>
+                @endif
                 @endif
             @endforeach
 

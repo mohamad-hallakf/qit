@@ -21,9 +21,11 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     {{-- <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" /> --}}
 
-    <link href="{{ asset('fontawesome') }}/css/all.css" rel="stylesheet">
+    <link href="{{ asset('fontawesome') }}/css/all.min.css" rel="stylesheet">
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('material') }}/css/material-dashboard-rtl.css?v=1.1" rel="stylesheet" />
+{{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/> --}}
 
 </head>
 
@@ -86,8 +88,8 @@
     <script src="{{ asset('material') }}/demo/demo.js"></script>
     <script src="{{ asset('material') }}/js/settings.js"></script>
     {{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <style>
         a{
             text-decoration: none;
@@ -135,7 +137,7 @@
 
             $("#notify").load(window.location.href + " #notify" );
 
-            setTimeout(reloadPage, 5000);
+            setTimeout(reloadPage, 10000);
             }
       })
     </script>

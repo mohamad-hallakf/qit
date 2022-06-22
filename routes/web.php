@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/hardware', function () {
     return view('hardware');
-});
+})->name('hardware');;
 
 Route::get('/notify', [App\Http\Controllers\UserController::class, 'getNotifications']);
 
@@ -202,7 +202,7 @@ Route::post("$model_name/edit", '' . $controller_name . '@edit')->name('Chart.ed
 Route::get('sensor', function () {
 
 
-    $response = Http::get('http://192.168.43.29/sensor');
+    $response = Http::timeout(2)->get('http://192.168.43.145/sensor');
     $data=array();
     if( $response->successful()){
         $data['response'] = true;
@@ -218,7 +218,7 @@ Route::get('sensor', function () {
 
 Route::get('openDoor', function () {
 
-    $response = Http::get('http://192.168.43.29/open');
+    $response = Http::get('http://192.168.43.145/open');
 
     $data = array();
     if ($response->successful()) {
@@ -233,7 +233,7 @@ Route::get('openDoor', function () {
 
 Route::get('closeDoor', function () {
 
-    $response = Http::get('http://192.168.43.29/close');
+    $response = Http::get('http://192.168.43.145/close');
 
     $data = array();
     if ($response->successful()) {
@@ -245,3 +245,64 @@ Route::get('closeDoor', function () {
     }
     return   $data;
 })->name('closeDoor');
+Route::get('fanRun', function () {
+
+    $response = Http::get('http://192.168.43.145/fanRun');
+
+    $data = array();
+    if ($response->successful()) {
+        $data['response'] = true;
+        $data['data'] = $response->body();
+    } else {
+        $data['response'] = false;
+        $data['data'] = '';
+    }
+    return   $data;
+})->name('fanRun');
+
+Route::get('fanClose', function () {
+
+    $response = Http::get('http://192.168.43.145/fanClose');
+
+    $data = array();
+    if ($response->successful()) {
+        $data['response'] = true;
+        $data['data'] = $response->body();
+    } else {
+        $data['response'] = false;
+        $data['data'] = '';
+    }
+    return   $data;
+})->name('fanClose');
+
+
+Route::get('ledON', function () {
+
+    $response = Http::get('http://192.168.43.145/ledON');
+
+    $data = array();
+    if ($response->successful()) {
+        $data['response'] = true;
+        $data['data'] = $response->body();
+    } else {
+        $data['response'] = false;
+        $data['data'] = '';
+    }
+    return   $data;
+})->name('ledON');
+
+Route::get('ledOFF', function () {
+
+    $response = Http::get('http://192.168.43.145/ledOFF');
+
+    $data = array();
+    if ($response->successful()) {
+        $data['response'] = true;
+        $data['data'] = $response->body();
+    } else {
+        $data['response'] = false;
+        $data['data'] = '';
+    }
+    return   $data;
+})->name('ledOFF');
+
