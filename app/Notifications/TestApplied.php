@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewAnswer extends Notification
+class TestApplied extends Notification
 {
     use Queueable;
 
@@ -42,9 +42,9 @@ class NewAnswer extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -55,10 +55,10 @@ class NewAnswer extends Notification
      */
     public function toDatabase($notifiable)
     {
-         $text= 'Dear student, your mark in ' . $this->arr['test'] . ' test is a ' . $this->arr['mark'] . '  at ' . $this->arr['date'] ;
-          return [
-            'title'         => 'new mark',
-            'module'        => 'marks',
+        $text = 'Student ' . $this->arr['user'] . ' apply the test ' . $this->arr['test'] .  ' at ' . $this->arr['date'];
+        return [
+            'title'         => 'new test apply',
+            'module'        => 'tests',
             'type'          => 'created', // created, published, viewed,
             'icon'          => 'fas fa-user',
             'text'          => $text,

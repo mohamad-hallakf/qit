@@ -1,24 +1,13 @@
-@extends('layouts.app', ['activePage' => 'questionsIndex' ])
+@extends('layouts.app', ['activePage' => 'user-marks'])
+
 @section('content')
     <div class="content">
         <div class="container-fluid">
             <div class=" row   bg-gray m-1 mb-2 rounded pb-0 ">
                 <div class="col-10  mt-2">
-                    <h1 class="text-muted  text-lg h1  " > Questions Record</h1>
+                    <h1 class="text-muted  text-lg h1  "> Students Marks </h1>
                 </div>
-                <div class="col-2 mt-2 text-center">
 
-                    <!-- Button trigger modal -->
-                    <span data-toggle="tooltip" data-placement="auto">
-
-                        <button type="button" class="btn btn-success    " data-toggle="modal" data-target="#addmodel"
-                            id='internalAdding'>
-                            <i class="fas fa-plus-circle fa-2x"></i>
-                        </button>
-
-                    </span>
-
-                </div>
             </div>
             <hr>
 
@@ -36,15 +25,11 @@
             </div>
         </div>
 
+
+
     </div>
 @endsection
 @push('js')
-    <div>
-
-        @include('question.delete-question')
-        @include('question.add-question')
-        @include('question.edit-question')
-    </div>
     <script type="text/javascript">
         $(document).ready(function populate() {
 
@@ -54,7 +39,7 @@
                 @foreach ($columnArray as $column)
                     header = header + '<th>{{ __('' . $column) }}</th>';
                 @endforeach
-                header = header + '<th>{{ __('action') }}</th>';
+
                 $('#table-header').html(header);
 
                 var columnsNames = []
@@ -64,12 +49,10 @@
                         data: '{{ $column }}'
                     }, )
                 @endforeach
-                columnsNames.push({
-                    data: 'action',
-                    name: '{{ __('action') }}',
-                    orderable: false,
-                    searchable: false
-                }, )
+                                var printColumn = []
+
+                for (i = 0; i < columnsNames.length ; i++)
+                    printColumn.push(i)
                 var table = $('.data-table').DataTable({
                     "language": {
                         "infoEmpty": "{{ __('no data') }}",
@@ -89,8 +72,29 @@
                     processing: true,
 
                     serverSide: true,
-                    ajax: "{{ route('question.index') }}",
-                    columns: columnsNames
+                    ajax: "{{ route('user.marks') }}",
+                    columns: columnsNames,
+                    "dom": '<lf<B><t>ip>',
+                    buttons: [{
+                            extend: 'excelHtml5',
+                            className: 'btn btn-success  btn-sm mx-2',
+                            exportOptions: {
+                                columns: printColumn
+                            }
+
+
+                        },
+                        {
+                            extend: 'print',
+                            className: 'btn btn-info  btn-sm mx-2',
+                            exportOptions: {
+                                columns: printColumn
+                            }
+
+
+
+                        },
+                    ]
                 });
 
             });
@@ -107,7 +111,7 @@
                 'id': id
             }
             $.ajax({
-                url: "{{ route('question.edit') }}",
+                url: "{{ route('user.edit') }}",
                 type: 'post',
                 dataType: 'json',
                 data,
@@ -120,6 +124,7 @@
                             $("#editForm select[name=" + index + "]").val(value)
 
                         });
+                        console.log(data.data)
 
                     } else {}
                 }
@@ -130,6 +135,4 @@
 
         });
     </script>
-
-
 @endpush

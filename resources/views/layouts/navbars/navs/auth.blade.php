@@ -89,3 +89,4 @@
 </nav>
 
 
+<div id="alertPlace" style="margin-top:60px "></div>

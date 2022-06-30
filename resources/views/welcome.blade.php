@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
       <div class="col-lg-7 col-md-8">
           @guest
-          <h1 class="text-white text-center mt-3">{{ __('Welcome to Baby Care Project') }}</h1>
+          <h1 class="text-white text-center mt-3">{{ __('Welcome to QIT Project') }}</h1>
           @endguest
       </div>
   </div>

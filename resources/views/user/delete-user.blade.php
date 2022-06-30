@@ -32,7 +32,7 @@ aria-hidden="true">
         var id = $(this).attr('data-id');
         data={'id':id}
         $.ajax({
-            url: "{{ route('question.destroy') }}" ,
+            url: "{{ route('user.destroy') }}" ,
             type: 'post',
             dataType: 'json',
             data:data,

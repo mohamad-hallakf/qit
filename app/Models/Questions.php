@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Answers;
-use App\Models\User;
+use App\Models\Test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,8 +14,8 @@ class Questions extends Model
     {
         return $this->hasMany(Answers::class, 'questionid');
     }
-    public function user()
+    public function tests()
     {
-        return $this->belongsTo(User::class, 'userid');
+        return $this->belongsTo(Test::class, 'test_questions');
     }
 }

@@ -1,10 +1,11 @@
-@extends('layouts.app', ['activePage' => 'questionsIndex' ])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('User Profile')])
+
 @section('content')
     <div class="content">
         <div class="container-fluid">
             <div class=" row   bg-gray m-1 mb-2 rounded pb-0 ">
                 <div class="col-10  mt-2">
-                    <h1 class="text-muted  text-lg h1  " > Questions Record</h1>
+                    <h1 class="text-muted  text-lg h1  "> Students Accounts </h1>
                 </div>
                 <div class="col-2 mt-2 text-center">
 
@@ -36,15 +37,15 @@
             </div>
         </div>
 
+
+
     </div>
 @endsection
 @push('js')
-    <div>
+    @include('user.add-user')
+    @include('user.delete-user')
+    @include('user.edit-user')
 
-        @include('question.delete-question')
-        @include('question.add-question')
-        @include('question.edit-question')
-    </div>
     <script type="text/javascript">
         $(document).ready(function populate() {
 
@@ -89,7 +90,7 @@
                     processing: true,
 
                     serverSide: true,
-                    ajax: "{{ route('question.index') }}",
+                    ajax: "{{ route('user.index') }}",
                     columns: columnsNames
                 });
 
@@ -107,7 +108,7 @@
                 'id': id
             }
             $.ajax({
-                url: "{{ route('question.edit') }}",
+                url: "{{ route('user.edit') }}",
                 type: 'post',
                 dataType: 'json',
                 data,
@@ -120,6 +121,7 @@
                             $("#editForm select[name=" + index + "]").val(value)
 
                         });
+                        console.log(data.data)
 
                     } else {}
                 }

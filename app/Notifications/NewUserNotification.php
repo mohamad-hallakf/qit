@@ -55,10 +55,9 @@ class NewUserNotification extends Notification
      */
     public function toDatabase($notifiable)
     {
-        $text = ' عميل جديد قام بتسجيل حساب {  '.$this->arr['username'].' }';
+        $text = '  ';
         return [
-            'title'         => 'عميل جديد',
-            'module'        => 'الزبائن',
+
             'type'          => 'created', // created, published, viewed,
             'icon'          => 'fas fa-user',
             'text'          => $text,

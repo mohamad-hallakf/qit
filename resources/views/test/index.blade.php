@@ -1,10 +1,11 @@
-@extends('layouts.app', ['activePage' => 'questionsIndex' ])
+@extends('layouts.app', ['activePage' => 'test'])
+
 @section('content')
     <div class="content">
         <div class="container-fluid">
             <div class=" row   bg-gray m-1 mb-2 rounded pb-0 ">
                 <div class="col-10  mt-2">
-                    <h1 class="text-muted  text-lg h1  " > Questions Record</h1>
+                    <h1 class="text-muted  text-lg h1  "> Tests Record</h1>
                 </div>
                 <div class="col-2 mt-2 text-center">
 
@@ -36,15 +37,15 @@
             </div>
         </div>
 
+
+
     </div>
 @endsection
 @push('js')
-    <div>
+    @include('test.add-test')
+    @include('test.delete-test')
+    @include('test.show-test')
 
-        @include('question.delete-question')
-        @include('question.add-question')
-        @include('question.edit-question')
-    </div>
     <script type="text/javascript">
         $(document).ready(function populate() {
 
@@ -89,7 +90,7 @@
                     processing: true,
 
                     serverSide: true,
-                    ajax: "{{ route('question.index') }}",
+                    ajax: "{{ route('test.index') }}",
                     columns: columnsNames
                 });
 
@@ -100,36 +101,33 @@
 
         $(document).on('click', '.edit', function() {
             var id = $(this).attr('data-id');
-            removeValid("editForm", ["name", "username", "email", "password"])
+
 
             var form = document.getElementById('editForm');
             data = {
                 'id': id
             }
             $.ajax({
-                url: "{{ route('question.edit') }}",
+                url: "{{ route('test.show') }}",
                 type: 'post',
                 dataType: 'json',
                 data,
                 data,
                 success: function(data) {
                     if (data.response == true) {
-
-                        $.each(data.data, function(index, value) {
-                            $("#editForm input[name=" + index + "]").val(value)
-                            $("#editForm select[name=" + index + "]").val(value)
+                        $('#test').text('test: ' + data.data.name)
+                        $.each(data.data.questions, function(index, value) {
+                            $('#testQuestion').append(
+                                '<h4>question ' + (index + 1) + ': ' + value.content +
+                                '</h4> '
+                            )
 
                         });
+
 
                     } else {}
                 }
             });
-
-
-
-
         });
     </script>
-
-
 @endpush

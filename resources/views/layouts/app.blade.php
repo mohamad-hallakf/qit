@@ -1,33 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ __('Baby Care- Computer Engineering') }}</title>
+    <title>{{ __('Quality - For IT') }}</title>
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('material') }}/img/favicon.png">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
-    <link href="{{ asset('material') }}/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <link href="{{ asset('material') }}/css/bootstrap.min.css" rel="stylesheet"> --}}
     <!--     Fonts and icons     -->
     <link href="{{ asset('material') }}/css/fonts.css" rel="stylesheet" />
-    {{-- <link href="{{ asset('material') }}/css/maxcdn.css" rel="stylesheet" /> --}}
-    <!-- CSS Files -->
+
     <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
-    {{-- <link href="{{ asset('material') }}/css/material-dashboard.css?v=2.1.1" rel="stylesheet" /> --}}
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    {{-- <link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" /> --}}
+
 
     <link href="{{ asset('fontawesome') }}/css/all.min.css" rel="stylesheet">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('material') }}/css/material-dashboard-rtl.css?v=1.1" rel="stylesheet" />
-{{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/> --}}
-
-</head>
+    <link href="{{ asset('material') }}/css/flickity.min.css" rel="stylesheet">
+    {{-- <link href="{{ asset('material') }}/css/material-dashboard-rtl.css?v=1.1" rel="stylesheet" /> --}}
+ </head>
 
 <body class="{{ $class ?? '' }}">
     @auth()
@@ -85,19 +81,29 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('material') }}/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="{{ asset('material') }}/demo/demo.js"></script>
-    <script src="{{ asset('material') }}/js/settings.js"></script>
-    {{-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    {{-- <script src="{{ asset('material') }}/demo/demo.js"></script>
+    <script src="{{ asset('material') }}/js/settings.js"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+     <script src="{{ asset('material') }}/js/flickity.pkgd.min.js" type="text/javascript"></script>
+
     <style>
-        a{
+        a {
             text-decoration: none;
+        }
+
+        .custom-select {
+            padding: 0px 20px !important;
+
         }
     </style>
     <script>
         function Alert(Message, type) {
-            $('#alertPlace').html('<div class="alert alert-white h-75 mb-0 alert-dismissible fade show m-1  border border-' + type +
+            $('#alertPlace').html(
+                '<div class="alert alert-white h-75 mb-0 alert-dismissible fade show m-1  border border-' + type +
                 ' " role="alert"><button type="button"   class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <p class="text-' +
                 type + ' m-0 font-weight-bold">' + Message + '</p></div>');
         }
@@ -108,38 +114,40 @@
         });
 
         function formValidtor(formid, inputsNames) {
+            var err_counter = 0;
             $.each(inputsNames, function(index, value) {
                 if ($("#" + formid + " input[name=" + value + "]").val() == "") {
                     $("#" + formid + " input[name=" + value + "]").addClass('is-invalid')
                     $("#" + formid + " input[name=" + value + "]").removeClass('is-valid')
+                    err_counter++;
                 } else {
                     $("#" + formid + " input[name=" + value + "]").addClass('is-valid')
                     $("#" + formid + " input[name=" + value + "]").removeClass('is-invalid')
                 }
 
             });
+            return err_counter;
         }
 
-    // Enable pusher logging - don't include this in production
-    // Pusher.logToConsole = true;
+        function removeValid(formid, inputsNames) {
 
-    // var pusher = new Pusher('46cc7c909513df3f9d7e', {
-    //   cluster: 'eu'
-    // });
+            $.each(inputsNames, function(index, value) {
+                $("#" + formid + " input[name=" + value + "]").removeClass('is-invalid')
+                $("#" + formid + " input[name=" + value + "]").removeClass('is-valid')
+            });
 
-    // var channel = pusher.subscribe('noti');
-    // channel.bind('notify', function(data) {
-    //   alert(JSON.stringify(data));
-    // });
-  $(document).ready(function() {
-           reloadPage()
-            function reloadPage(){
+        }
 
-            $("#notify").load(window.location.href + " #notify" );
 
-            setTimeout(reloadPage, 10000);
-            }
-      })
+        //   $(document).ready(function() {
+        //            reloadPage()
+        //             function reloadPage(){
+
+        //             $("#notify").load(window.location.href + " #notify" );
+
+        //             setTimeout(reloadPage, 10000);
+        //             }
+        //       })
     </script>
 
     @stack('js')

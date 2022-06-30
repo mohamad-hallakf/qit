@@ -3,11 +3,11 @@
   <div class="container">
     <div class="navbar-wrapper">
       <a class="navbar-brand" href="{{ route('welcome') }}">
-        <div class="logo">
+        <div class="logo  h4">
 
-            <i class=" fa fa-lg fa-solid fa-baby mx-2"> </i>
 
-            {{ __('Baby Care') }}
+
+            Quality For IT
 
     </div></a>
     </div>

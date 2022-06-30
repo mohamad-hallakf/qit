@@ -10,14 +10,13 @@
                      </button>
                  </div>
                  <div class="modal-body">
-                     <form class="m-2 font-weight-bold " id="editQuestion">
-
+                     <form class="m-2 font-weight-bold " id="editForm">
                          <div class="form-group mb-3">
                              <div class="input-group">
                                  <div class="input-group-prepend">
-                                     <span class="input-group-text" id="">{{ __('question') }}</span>
+                                     <span class="input-group-text" id="">{{ __('name') }}</span>
                                  </div>
-                                 <input type="text" placeholder="{{ __('question content') }}" name="content"
+                                 <input type="text" placeholder="{{ __('name') }}" name="name"
                                      class=" form-control ">
 
                              </div>
@@ -26,9 +25,9 @@
                          <div class="form-group mb-3">
                              <div class="input-group">
                                  <div class="input-group-prepend">
-                                     <span class="input-group-text" id="">{{ __('right ans') }}</span>
+                                     <span class="input-group-text" id="">{{ __('username') }}</span>
                                  </div>
-                                 <input type="text" placeholder="{{ __('right answer') }}" name="right"
+                                 <input type="text" placeholder="{{ __('username') }}" name="username"
                                      class=" form-control ">
 
                              </div>
@@ -36,29 +35,9 @@
                          <div class="form-group mb-3">
                              <div class="input-group">
                                  <div class="input-group-prepend">
-                                     <span class="input-group-text" id="">{{ __('wrong 1') }}</span>
+                                     <span class="input-group-text" id="">{{ __('email') }}</span>
                                  </div>
-                                 <input type="text" placeholder="{{ __('wrong1') }}" name="wrong1"
-                                     class=" form-control ">
-
-                             </div>
-                         </div>
-                         <div class="form-group mb-3">
-                             <div class="input-group">
-                                 <div class="input-group-prepend">
-                                     <span class="input-group-text" id="">{{ __('wrong 2') }}</span>
-                                 </div>
-                                 <input type="text" placeholder="{{ __('wrong2') }}" name="wrong2"
-                                     class=" form-control ">
-
-                             </div>
-                         </div>
-                         <div class="form-group mb-3">
-                             <div class="input-group">
-                                 <div class="input-group-prepend">
-                                     <span class="input-group-text" id="">{{ __('wrong 3') }}</span>
-                                 </div>
-                                 <input type="text" placeholder="{{ __('wrong3') }}" name="wrong3"
+                                 <input type="email" placeholder="{{ __('email') }}" name="email"
                                      class=" form-control ">
 
                              </div>
@@ -86,13 +65,12 @@
      $(document).on('click', '#okEdit', function(e) {
          e.preventDefault();
          e.stopImmediatePropagation();
-         var form = document.getElementById('editQuestion');
-         var valid = formValidtor("editQuestion", ["content", "right", "wrong1", "wrong2", "wrong3"])
-
-         var data = $('#editQuestion').serialize();
+         var form = document.getElementById('editForm');
+         var valid = formValidtor("editForm", ["name", "username", "email"])
+         var data = $('#editForm').serialize();
          if (valid == 0) {
              $.ajax({
-                 url: "{{ route('question.update') }}",
+                 url: "{{ route('user.update') }}",
                  type: 'post',
                  dataType: 'json',
                  data: data,

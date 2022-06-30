@@ -19,8 +19,5 @@ use Illuminate\Support\Facades\Log;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/esp', function (Request $request ) {
 
-Log::info($request->getContent() );
-return "yasmine";
-});
+

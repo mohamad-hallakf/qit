@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Service;
-use App\Models\Child;
+use App\Models\Test;
+use App\Models\Questions;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Events\notify;
@@ -26,10 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::latest()->get();
-        $services = Service::latest()->get();
-        $children = Child::where('userid',Auth::id())->get();
-        $childrens = Child::latest()->get();
-        return view('dashboard',compact('services','children', 'users', 'childrens'));
+        $questions = Questions::latest()->get();
+         $tests = Test::latest()->get();
+        return view('dashboard',compact('questions', 'users', 'tests'));
     }
 
     public  function guest()

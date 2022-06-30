@@ -32,7 +32,7 @@ aria-hidden="true">
         var id = $(this).attr('data-id');
         data={'id':id}
         $.ajax({
-            url: "{{ route('question.destroy') }}" ,
+            url: "{{ route('test.destroy') }}" ,
             type: 'post',
             dataType: 'json',
             data:data,
@@ -44,7 +44,7 @@ aria-hidden="true">
                          $("#removemodel .close").click();
                          $('.modal-backdrop').hide();
                 } else {
-                    Alert("error", "dange")
+                    Alert("error", "danger")
 
                 }
             }
